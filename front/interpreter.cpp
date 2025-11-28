@@ -2,11 +2,15 @@
 #include <iostream>
 
 void run(const std::vector<ASTNode*>& ast) {
-    std::unordered_map<std::string, std::string> variables;
+    std::unordered_map<std::string, int> variables;
 
     for (auto node : ast) {
         if (auto v = dynamic_cast<VarDecl*>(node)) {
-            variables[v->name] = v->value;
+            if(v->expr) {
+                variables[v->name] = v->expr->evaluate(variables);
+            } else {
+                variables[v->name] = std::stoi(v->value);
+            }
         }
 
         else if (auto o = dynamic_cast<Output*>(node)) {
@@ -15,6 +19,14 @@ void run(const std::vector<ASTNode*>& ast) {
             } else {
                 std::cout << o->value << "\n";
             }
+        }
+        else if (auto a = dynamic_cast<Assignment*>(node)) {
+            if (!a->expr) {
+                std::cerr << "Runtime Error: assignment has no expression for " << a->name << "\n";
+                continue;
+            }
+            int result = a->expr->evaluate(variables);
+            variables[a->name] = result;
         }
         else {
             std::cerr << "Unknown AST node encountered.\n";

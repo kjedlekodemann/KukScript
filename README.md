@@ -1,4 +1,5 @@
 # KukScript
+Version Beta 0.2
 KukScript is a Primitive Language Based off of C++ with slightly differing syntax. 
 
  This is a Very Basic Beta, So Supported Features are Few. 

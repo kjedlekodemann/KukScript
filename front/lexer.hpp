@@ -18,7 +18,9 @@ enum class TokenType {
     OPERATOR,
     COLON,
     SEMICOLON,
-    UNKNOWN
+    UNKNOWN,
+    LPAREN,
+    RPAREN
 };
 
 struct Tokn {

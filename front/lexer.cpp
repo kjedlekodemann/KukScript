@@ -50,7 +50,6 @@ std::vector<Tokn> tokenize(const std::string &code) {
             else {tokns.push_back({TokenType::ID,word});}
             continue;
         }
-
         //operators
         std::string op;
         if (code[i] == '=' || code[i] == '/' || code[i] == '*' || code[i] == '-' || code[i] == '+' || code[i] == '>' || code[i] == '<') {
@@ -59,8 +58,8 @@ std::vector<Tokn> tokenize(const std::string &code) {
             tokns.push_back({TokenType::OPERATOR, op});
             continue;
         }
-
-        // ????
+        if (code[i]=='(') { tokns.push_back({TokenType::LPAREN,"("}); i++; continue;}
+        if (code[i]==')') { tokns.push_back({TokenType::RPAREN,")"}); i++; continue;}
         tokns.push_back({TokenType::UNKNOWN, std::string(1,code[i])});
         i++;
     }
