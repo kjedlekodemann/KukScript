@@ -1,0 +1,3 @@
+def x: int = 5;
+output: x;
+output: "Hello Kuk";
